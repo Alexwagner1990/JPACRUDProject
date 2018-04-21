@@ -10,10 +10,12 @@ import com.skilldistillery.jpacrud.entities.Restaurant;
 public interface RestaurantDAO {
 	
 	public List<Restaurant> allRestaurants();
-	public List<Restaurant> allRestaurantsOfType(Price price, Category category, Distance distance, Integer favorite);
-	public boolean addRestaurant(List<Restaurant> restaurants);
+	public List<Restaurant> allRestaurantsOfType(Restaurant rest);
+	public boolean addRestaurants(List<Restaurant> restaurants);
+	public boolean addRestaurant(Restaurant restaurants);
 	public boolean deleteRestaurant(int id);
 	public Restaurant updateRestaurant(Restaurant restaurant);
 	public Restaurant pickRandomRestaurant();
-	public Restaurant viewRestaurantInformation(String restName);
+	public List<Restaurant> viewRestaurantInformation(String restName);
+	public Restaurant findRestaurantById(int id);
 }

@@ -1,26 +1,52 @@
 package com.skilldistillery.jpacrud.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Restaurant {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	private String name;
+	@Enumerated(EnumType.STRING)
 	private Price price;
 	private String category;
+	@Enumerated(EnumType.STRING)
 	private Distance distance;
 	private String address;
 	private String logo;
 	private Integer favorite;
+	@Column(name="user_id")
+	private Integer userId;
 	
 	public Restaurant() {
 		
 	}
-	public Restaurant(int id, Price price, String category, Distance distance, String address, String logo) {
-		super();
-		this.id = id;
-		this.price = price;
-		this.category = category;
-		this.distance = distance;
-		this.address = address;
-		this.logo = logo;
+//	public Restaurant(int id, Price price, String category, Distance distance, String address, String logo) {
+//		super();
+//		this.id = id;
+//		this.price = price;
+//		this.category = category;
+//		this.distance = distance;
+//		this.address = address;
+//		this.logo = logo;
+//	}
+	
+	public int getId() {
+		return id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public Price getPrice() {
 		return price;
@@ -58,8 +84,11 @@ public class Restaurant {
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}
-	public int getId() {
-		return id;
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	
 	

@@ -15,5 +15,5 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'RestaurantPicker'
+rootProject.name = 'RestaurantPickerWebApp'
 includeFlat 'JPACRUDApp'
