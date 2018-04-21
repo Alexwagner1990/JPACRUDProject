@@ -14,7 +14,7 @@ public interface RestaurantDAO {
 	public boolean addRestaurants(List<Restaurant> restaurants);
 	public boolean addRestaurant(Restaurant restaurants);
 	public boolean deleteRestaurant(int id);
-	public Restaurant updateRestaurant(Restaurant restaurant);
+	public Restaurant updateRestaurant(Restaurant restaurant, int id);
 	public Restaurant pickRandomRestaurant();
 	public List<Restaurant> viewRestaurantInformation(String restName);
 	public Restaurant findRestaurantById(int id);

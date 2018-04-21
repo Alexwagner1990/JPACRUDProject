@@ -29,6 +29,8 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 		return allRestaurants;
 	}
 
+	
+	//NOT YET COMPLETED
 	@Override
 	public List<Restaurant> allRestaurantsOfType(Restaurant rest) {
 		String query = "select r from Restaurant r where price = ?, category = ?, distance = ?, favorite = ?";
@@ -42,8 +44,8 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 		try {
 			for (Restaurant restaurant : restaurants) {
 				em.persist(restaurant);
+				em.flush();
 			}
-			em.flush();
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -76,9 +78,9 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 	}
 
 	@Override
-	public Restaurant updateRestaurant(Restaurant restaurant) {
-		int id = restaurant.getId();
+	public Restaurant updateRestaurant(Restaurant restaurant, int id) {
 		Restaurant db = em.find(Restaurant.class, id);
+		System.out.println(db);
 		db.setAddress(restaurant.getAddress());
 		db.setCategory(restaurant.getCategory());
 		db.setDistance(restaurant.getDistance());
@@ -88,7 +90,8 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 		db.setUserId(restaurant.getUserId());
 		em.persist(db);
 		em.flush();
-		return restaurant;
+		System.out.println(db);
+		return db;
 	}
 
 	@Override
@@ -101,7 +104,7 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 
 	@Override
 	public List<Restaurant> viewRestaurantInformation(String restName) {
-		String queryString = "SELECT r FROM Restaurant r where r.name like *:name*";
+		String queryString = "SELECT r FROM Restaurant r where r.name = :name";
 		List<Restaurant> search = em.createQuery(queryString, Restaurant.class).setParameter("name", restName).getResultList();
 		return search;
 	}

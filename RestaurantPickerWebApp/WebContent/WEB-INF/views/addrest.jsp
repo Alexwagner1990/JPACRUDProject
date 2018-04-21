@@ -16,9 +16,6 @@
 	<table>
 	<tr>
 	<td>
-	QUICK BUTTONS:
-	</td>
-	<td>
 		<form action="index.do" method="get">
 		<input type="submit" value="Home">
 		</form>
@@ -29,32 +26,24 @@
 	</form>
 	</td>
 	<td>
-	<form action="pickrandomByParam.do" method="post">
-		<input type="submit" value="Pick a Random Restaurant By Param!">
-	</form>
-	</td>
-	<td>
-	<form action="addrest.do" method="post" name="restNums">
+	<form action="quickadd.do" method="post" >
 		<input type="submit" value="Quick Add!">
 	</form>
 	</td>
 	</tr>
+	</table>
 </div>
 <h1>Add Restaurant:</h1>
 
 <c:forEach var="num" items="${RestNumber }">
-<form action="addresttodata.do">
-Title:<input type="text" name="title">
-Description:<input type="text" name="title">
-Price:<input type="text" name="title">
-Category:<input type="text" name="title">
-Distance:<input type="text" name="title" value=>
-Address:<input type="text" name="title" value="PLACEHOLDER">
-Logo(Url):<input type="text" name="title" placeholder="PLACEHOLDER">
-Favorite:<input type="text" name="favorite" value=0>
-<input type="hidden" name="user_id" value=0>
+<form action="addrest.do" method="post">
+COMING SOON MULTIPLE TEXT BOXES
 </form>
 </c:forEach>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body>
 </html>

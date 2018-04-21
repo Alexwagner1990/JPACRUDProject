@@ -16,9 +16,6 @@
 	<table>
 	<tr>
 	<td>
-	QUICK BUTTONS:
-	</td>
-	<td>
 		<form action="index.do" method="get">
 		<input type="submit" value="Home">
 		</form>
@@ -29,12 +26,7 @@
 	</form>
 	</td>
 	<td>
-	<form action="pickrandomByParam.do" method="post">
-		<input type="submit" value="Pick a Random Restaurant By Param!">
-	</form>
-	</td>
-	<td>
-	<form action="addrest.do" method="post" name="restNums">
+	<form action="quickadd.do" method="post" >
 		<input type="submit" value="Quick Add!">
 	</form>
 	</td>
@@ -42,8 +34,10 @@
 	</table>
 </div>
 <div>
-<h1>RESTAURANT</h1>
+<h1>UPDATE RESTAURANT</h1>
 <form action="update.do" name="restaurant" method="post">
+<input type="hidden" name="id" value="${restaurant.id}">
+<input type="hidden" name="userId" value="${restaurant.userId}">
 <table>
 <tr><td>Name:</td><td>${restaurant.name }</td><td><input type="text" name="name" placeholder="New Name"/></td></tr>
 <tr><td>Price:</td><td>${restaurant.price }</td><td><input type="text" name="price" placeholder="New Price"/></td></tr>
@@ -51,13 +45,16 @@
 <tr><td>Distance:</td><td>${restaurant.distance }</td><td><input type="text" name="distance" placeholder="New Distance"/></td></tr>
 <tr><td>Address:</td><td>${restaurant.address }</td><td><input type="text" name="address" placeholder="New Address"/></td></tr>
 <tr><td>Favorite:</td><td>${restaurant.favorite }</td><td><input type="number" name="favorite" placeholder="New Favorite"/></td></tr>
-<tr><td><input type="submit" value="MAKE SELECTED CHANGES"></td></tr>
+<tr><td>Logo URL:</td><td>${restaurant.logo }</td><td><input type="text" name="logo" placeholder="Logo URL"/></td></tr>
 </table>
+<input type="submit" value="MAKE SELECTED CHANGES">
 </form>
 
 </div>
 
-
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body>
 </html>

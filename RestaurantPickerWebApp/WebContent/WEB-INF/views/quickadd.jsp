@@ -33,55 +33,27 @@
 	</tr>
 	</table>
 </div>
-<br>
-<br>
-<div>
+<h1>Add Restaurant:</h1>
+
+<form action="addrest.do" method="post">
 <table>
-<tr>
-	<td>
-	<form action="findrest.do" method="post">
-		<input type="text" name="searchTerm" placeholder="Name of Restaurant">
-		<input type="submit" value="Find a Restaurant!">
-	</form>
-	</td>
-</tr>
-<tr>
-	<td>
-	<form action="findrestList.do" method="post">
-		<input type="text" placeholder="Type Of Restaurant">
-		<input type="submit" value="List Restraunts Of a Type!">
-	</form>
-	</td>
-</tr>
-<tr>
-	<td>
-	<form action="addrestPage.do" method="post">
-		<input type="number" placeholder="# of Restaurants to Add">
-		<input type="submit" name="restNums" value="Add Multiple Restaurants At Once!">
-	</form>
-	</td>
-	</tr>
-<tr>
-	<td>
-	<form action="pickrandomByParam.do" method="post">
-		<input type="submit" value="Pick a Random Restaurant By Param!">
-	</form>
-	</td>
-</tr>
+<tr><td>Name:</td><td><input type="text" name="name" value=" " placeholder="Restaurant Name"></td></tr>
+<tr><td>Price:</td><td><input type="text" name="price" value=" " placeholder="CHEAP, AVERAGE, PRICEY, or NONE"></td></tr>
+<tr><td>Category:</td><td><input type="text" name="category" value=" " placeholder="Category"></td></tr>
+<tr><td>Distance:</td><td><input type="text" name="distance" value=" " placeholder="CLOSE, AVERAGE, FAR, or NONE"></td></tr>
+<tr><td>Address:</td><td><input type="text" name="address" value=" " placeholder="Address"></td></tr>
+<tr><td>Logo(Url):</td><td><input type="text" name="logo" value=" " placeholder="Address"></td></tr>
+<tr><td>Favorite:</td><td><input type="number" name="favorite" value="0" placeholder="1 to mark favorite, 0 to not"></td></tr>
 </table>
-</div>
-<h2>Display Test</h2>
-<c:forEach var="rest" items="${fullList}">
-<ul>
-<li>${rest.name }	${rest.category }	${rest.price }</li>
-</ul>
-</c:forEach>
-
-
+<input type="hidden" name="userId" value="0"/>
+<input type="hidden" name="id" value="0"/>
+<input type="submit" value="ADD RESTAURANT"/>
+</form>
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </body>
 </html>
