@@ -10,6 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Restaurant</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="css/MyCss.css">
 </head>
 <body>
 <div class="topnav">
@@ -25,6 +26,11 @@
 		<input type="submit" value="Quick Pick!">
 	</form>
 	</td>
+		<td>
+	<form action="pickfavorite.do" method="post">
+		<input type="submit" value="Pick a Favorite!"/>
+	</form>
+	</td>
 	<td>
 	<form action="quickadd.do" method="post" >
 		<input type="submit" value="Quick Add!">
@@ -35,10 +41,12 @@
 </div>
 <div>
 <c:if test="${confirm }">
-<h1>Restaurant Added Successfully</h1>
+<h1>Restaurant(s) Added Successfully</h1>
+<img src="images/thumbsup.jpeg" alt="success">
 </c:if>
 <c:if test="${!confirm }">
-<h1>Restaurant wasn't added, something went wrong</h1>
+<h1>Addition Failure, something went wrong</h1>
+<img src="images/sorry.png" alt="failure">
 </c:if>
 </div>
 

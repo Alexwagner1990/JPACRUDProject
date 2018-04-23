@@ -10,6 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Update Restaurant</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="css/MyCss.css">
 </head>
 <body>
 <div class="topnav">
@@ -23,6 +24,11 @@
 	<td>
 	<form action="pickrandom.do" method="post">
 		<input type="submit" value="Quick Pick!">
+	</form>
+	</td>
+		<td>
+	<form action="pickfavorite.do" method="post">
+		<input type="submit" value="Pick a Favorite!"/>
 	</form>
 	</td>
 	<td>
@@ -42,7 +48,8 @@
 <tr><td>Category:</td><td>${restaurant.category }</td></tr>
 <tr><td>Distance:</td><td>${restaurant.distance }</td></tr>
 <tr><td>Address:</td><td>${restaurant.address }</td></tr>
-<tr><td>Favorite:</td><td>${restaurant.favorite }</td></tr>
+<tr><td>Favorite:</td><td><c:if test="${restaurant.favorite == 1 }"><img class="favorite" alt="Yes" src="images/checkmark.jpg"></c:if>
+<c:if test="${restaurant.favorite == 0 }"><img class="favorite" alt="No" src="images/xmark.jpg"></c:if></td></tr>
 <tr><td><form action="updatePage.do" name="restaurant" method="post">
 <input type="submit" value="UPDATE THIS RESTAURANT"/>
 <input type="hidden" name="id" value="${restaurant.id }"/>

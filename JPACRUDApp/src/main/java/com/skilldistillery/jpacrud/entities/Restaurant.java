@@ -29,6 +29,10 @@ public class Restaurant {
 	public Restaurant() {
 		
 	}
+	
+	public Restaurant(String name) {
+		this.name=name;
+	}
 //	public Restaurant(int id, Price price, String category, Distance distance, String address, String logo) {
 //		super();
 //		this.id = id;

@@ -10,8 +10,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Pick A Restaurant!</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="css/MyCss.css">
 </head>
 <body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-4">
 <div class="topnav">
 	<table>
 	<tr>
@@ -26,6 +30,11 @@
 	</form>
 	</td>
 	<td>
+	<form action="pickfavorite.do" method="post">
+		<input type="submit" value="Pick a Favorite!"/>
+	</form>
+	</td>
+	<td>
 	<form action="quickadd.do" method="post" >
 		<input type="submit" value="Quick Add!">
 	</form>
@@ -33,9 +42,20 @@
 	</tr>
 	</table>
 </div>
-<br>
-<br>
-<div>
+</div>
+</div> <!-- END OF NAVBAR -->
+</div> <!-- END OF NAVBAR CONTAINER -->
+<div class="jumbotron text-center">
+  <h1>RESTAURANT PICKER</h1>      
+  <p>Want to go out to eat tonight, but not sure where to go? Let Restaurant Picker help!</p>
+  <p>Give us some restaurants to choose from, and we'll pick a restaurant for you!</p>
+</div>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-2 well"></div>
+<div class="col-sm-8 text-center">
+<img src="images/food.jpeg" class="img-rounded img-responsive" alt="Food">
+<div class="page-header"><h2>Search for a Restaurant You've Added</h2></div>
 <table>
 <tr>
 	<td>
@@ -45,37 +65,74 @@
 	</form>
 	</td>
 </tr>
+</table>
+<div class="page-header"><h2>List/Pick Restaurants of a Type</h2></div>
+<table>
 <tr>
 	<td>
 	<form action="findrestList.do" method="post">
-		<input type="text" placeholder="Type Of Restaurant">
-		<input type="submit" value="List Restraunts Of a Type!">
-	</form>
-	</td>
-</tr>
-<tr>
-	<td>
-	<form action="addrestPage.do" method="post">
-		<input type="number" placeholder="# of Restaurants to Add">
-		<input type="submit" name="restNums" value="Add Multiple Restaurants At Once!">
-	</form>
-	</td>
-	</tr>
-<tr>
-	<td>
-	<form action="pickrandomByParam.do" method="post">
-		<input type="submit" value="Pick a Random Restaurant By Param!">
+		<select name="type">
+		<option value="cat">Category</option>
+		<option value="distance">Distance</option>
+		<option value="price">Price</option>
+		</select>
+		<input type="submit" value="List Restaurants">
 	</form>
 	</td>
 </tr>
 </table>
+<div class="page-header"><h2>Add More Than One Restaurant At a Time</h2>
 </div>
-<h2>Display Test</h2>
+<table>
+<tr>
+	<td>
+	<form action="addrestPage.do" method="post">
+		<input type="number" name="restNums" placeholder="# of Restaurants to Add" required>
+		<input type="submit" value="Add Multiple">
+	</form>
+	</td>
+	</tr>
+</table>
+<div class="page-header"><h2>Your Restaurants:</h2></div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Name</th><th>Category</th><th>Price</th>
+</tr>
+</thead>
+<tbody>
 <c:forEach var="rest" items="${fullList}">
-<ul>
-<li>${rest.name }	${rest.category }	${rest.price }</li>
-</ul>
+<tr>
+<td>${rest.name }</td>	<td>${rest.category }</td> <td><c:if test="${rest.favorite == 1 }"><img class="favorite" alt="Yes" src="images/checkmark.jpg"></c:if>
+<c:if test="${rest.favorite == 0 }"><img class="favorite" alt="No" src="images/xmark.jpg"></c:if></td> 
+<td><form action="updatePage.do" method="post"><input type="hidden" name="id" value="${rest.id}"/><input type="submit" value="UPDATE THIS RESTAURANT"/></form></td>
+<td><form action="delete.do" method="post"><input type="hidden" name="id" value="${rest.id}"/><input type="submit" value="DELETE THIS RESTAURANT"/></form></td>
+</tr>
 </c:forEach>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div class="col-sm-2 well"></div>
+
+
+
+
+
+</div><!-- END OF BODY ROW -->
+</div><!--  END OF CONTAINER FLUID -->
+
+
+
+
+
+
+
 
 
 

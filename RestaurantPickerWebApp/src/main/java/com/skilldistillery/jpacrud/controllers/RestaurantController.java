@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.jpacrud.data.RestaurantDAO;
+import com.skilldistillery.jpacrud.entities.Distance;
+import com.skilldistillery.jpacrud.entities.Price;
 import com.skilldistillery.jpacrud.entities.Restaurant;
 
 @Controller
@@ -22,9 +24,7 @@ public class RestaurantController {
 	@RequestMapping(path = "index.do", method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("In controller");
 		List<Restaurant> fullList = dao.allRestaurants();
-		System.out.println("out of allRestaurants");
 		mv.setViewName("WEB-INF/views/index.jsp");
 		mv.addObject("fullList", fullList);
 		return mv;
@@ -55,13 +55,37 @@ public class RestaurantController {
 		mv.setViewName("WEB-INF/views/addrestConfirm.jsp");
 		return mv;
 	}
+	
+	@RequestMapping(path="addLotsRest.do", method= RequestMethod.POST)
+	public ModelAndView addLotsOfRestToDB(@RequestParam(name="name[]")String[] names) {
+		System.out.println(names);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("WEB-INF/views/addrestConfirm.jsp");
+		Boolean check = dao.addManyRestaurants(names);
+		mv.addObject("confirm", check);
+		return mv;
+	}
 
 	@RequestMapping(path = "pickrandom.do", method = RequestMethod.POST)
 	public ModelAndView pickRandom() {
 		ModelAndView mv = new ModelAndView();
 		Restaurant rest = dao.pickRandomRestaurant();
+		if(rest !=null) {
 		mv.setViewName("WEB-INF/views/pickrest.jsp");
 		mv.addObject("restaurant", rest);
+		}
+		else {
+			mv.setViewName("WEB-INF/views/index.jsp");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(path="pickfavorite.do", method=RequestMethod.POST)
+	public ModelAndView pickFavorite() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("WEB-INF/views/pickrest.jsp");
+		Restaurant picked = dao.pickRandomFavoriteRestaurant();
+		mv.addObject("restaurant", picked);
 		return mv;
 	}
 
@@ -105,6 +129,80 @@ public class RestaurantController {
 		Boolean deleted = dao.deleteRestaurant(id);
 		mv.addObject("deleted", deleted);
 		mv.setViewName("WEB-INF/views/deleterest.jsp");
+		return mv;
+	}
+	
+	@RequestMapping(path = "findrestList.do", method = RequestMethod.POST)
+	public ModelAndView directingToRestaurantListPages(@RequestParam(name="type") String type) {
+		ModelAndView mv = new ModelAndView();
+		List<Restaurant> blankobject = null;
+		mv.addObject("restList", blankobject);
+		if(type.equals("cat")) {
+			mv.setViewName("WEB-INF/views/listAllByCat.jsp");
+		}
+		if(type.equals("distance")) {
+			mv.setViewName("WEB-INF/views/listAllByDistance.jsp");
+		}
+		if(type.equals("price")){
+			mv.setViewName("WEB-INF/views/listAllByPrice.jsp");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(path= "findCategory.do", method= RequestMethod.POST)
+	public ModelAndView showAllOfACategory(@RequestParam(name="category") String category) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("WEB-INF/views/listAllByCat.jsp");
+		List<Restaurant> results = dao.getRestaurantsOfCategory(category);
+		mv.addObject("restList", results);
+		mv.addObject("choice", category);
+		return mv;
+	}
+	
+	@RequestMapping(path= "findPrice.do", method= RequestMethod.POST)
+	public ModelAndView showAllOfAPrice(@RequestParam(name="price") String price) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("WEB-INF/views/listAllByPrice.jsp");
+		List<Restaurant> results = dao.getRestaurantsOfPrice(price);
+		mv.addObject("restList", results);
+		mv.addObject("choice", price);
+		return mv;
+	}
+	
+	@RequestMapping(path= "findDistance.do", method= RequestMethod.POST)
+	public ModelAndView showAllOfADistance(@RequestParam(name="distance") String distance) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("WEB-INF/views/listAllByDistance.jsp");
+		List<Restaurant> results = dao.getRestaurantsOfDistance(distance);
+		mv.addObject("restList", results);
+		mv.addObject("choice", distance);
+		return mv;
+	}
+	
+	@RequestMapping(path="randomCat.do", method=RequestMethod.POST)
+	public ModelAndView pickRandomRestByCat(@RequestParam(name="choice") String choice) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("WEB-INF/views/pickrest.jsp");
+		Restaurant picked = dao.pickRandomRestaurantOfCategory(choice);
+		mv.addObject(picked);
+		return mv;
+	}
+	
+	@RequestMapping(path="randomPrice.do", method=RequestMethod.POST)
+	public ModelAndView pickRandomRestByPrice(@RequestParam(name="choice") String choice) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("WEB-INF/views/pickrest.jsp");
+		Restaurant picked = dao.pickRandomRestaurantOfPrice(choice);
+		mv.addObject(picked);
+		return mv;
+	}
+	
+	@RequestMapping(path="randomDistance.do", method=RequestMethod.POST)
+	public ModelAndView pickRandomRestByDistance(@RequestParam(name="choice") String choice) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("WEB-INF/views/pickrest.jsp");
+		Restaurant picked = dao.pickRandomRestaurantOfDistance(choice);
+		mv.addObject(picked);
 		return mv;
 	}
 }

@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+body{
+	background-color: #D1F2EB;
+	font-family:Helvetica;
+}
+h1, h2{
+	color: #5B2C6F;	
+}
+.favorite{
+	width:100px;
+	height:100px;
+}
