@@ -8,6 +8,7 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider
     </provider>
 		<class>com.skilldistillery.jpacrud.entities.Restaurant</class>
+		<class>com.skilldistillery.jpacrud.entities.User</class>
 	
 		<properties>
 			<property name="javax.persistence.jdbc.url"

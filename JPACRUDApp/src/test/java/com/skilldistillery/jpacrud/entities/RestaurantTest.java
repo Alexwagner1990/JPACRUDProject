@@ -73,8 +73,8 @@ class RestaurantTest {
 	@DisplayName("Restaurant Deleting")
 	void testDelete() {
 		em.getTransaction().begin();
-		em.remove(em.find(Restaurant.class, 53));
-		assertEquals(null, em.find(Restaurant.class, 53));
+		em.remove(em.find(Restaurant.class, 1));
+		assertEquals(null, em.find(Restaurant.class, 1));
 		em.getTransaction().rollback();
 	}
 
