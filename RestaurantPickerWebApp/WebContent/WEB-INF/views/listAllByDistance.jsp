@@ -76,13 +76,14 @@ Enter a Price:<select name="distance">
 <table class="table table-striped">
 <thead>
 <tr>
-<th>Name</th><th>Category</th><th>Price</th><th>Address</th><th>Website</th>
+<th>Name</th><th>Category</th><th>Price</th><th>Address</th><th>Favorite</th>
 </tr>
 </thead>
 <tbody>
 <c:forEach var="rest" items="${restList}">
 <tr>
-<td>${rest.name }</td>	<td>${rest.category }</td> <td>${rest.price }</td> <td>${rest.address }</td> <td>${rest.logo }</td> 
+<td>${rest.name }</td>	<td>${rest.category }</td> <td>${rest.price }</td> <td>${rest.address }</td> <td><c:if test="${rest.favorite == 1 }"><img class="favorite" alt="Yes" src="images/checkmark.jpg"></c:if>
+<c:if test="${rest.favorite == 0 }"><img class="favorite" alt="No" src="images/xmark.jpg"></c:if></td> 
 <td><form action="updatePage.do" method="post"><input type="hidden" name="id" value="${rest.id}"/><input type="submit" value="UPDATE THIS RESTAURANT"></form></td>
 <td><form action="delete.do" method="post"><input type="hidden" name="id" value="${rest.id}"/><input type="submit" value="DELETE THIS RESTAURANT"></form></td>
 </tr>

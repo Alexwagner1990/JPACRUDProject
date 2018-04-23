@@ -100,7 +100,7 @@
 <table class="table table-striped">
 <thead>
 <tr>
-<th>Name</th><th>Category</th><th>Price</th>
+<th>Name</th><th>Category</th><th>Favorite</th>
 </tr>
 </thead>
 <tbody>

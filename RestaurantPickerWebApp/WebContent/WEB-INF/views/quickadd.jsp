@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="css/MyCss.css">
 </head>
 <body>
+<div class="container-fluid">
 <div class="topnav">
 	<table>
 	<tr>
@@ -39,6 +40,9 @@
 	</tr>
 	</table>
 </div>
+<div class="row">
+<div class="col-sm-1"></div>
+<div class="col-sm-10 text-center">
 <h1>Add Restaurant:</h1>
 
 <form action="addrest.do" method="post">
@@ -56,7 +60,7 @@
 <option value="AVERAGE">Average</option>
 <option value="FAR">Far</option></select></td></tr>
 <tr><td>Address:</td><td><input type="text" name="address" value=" " placeholder="Address"></td></tr>
-<tr><td>Logo(Url):</td><td><input type="text" name="logo" value=" " placeholder="Address"></td></tr>
+<tr><td>Website:</td><td><input type="text" name="logo" value=" " placeholder="Address"></td></tr>
 <tr><td>Favorite:</td><td><select name="favorite">
 <option value="0">Unfavorite</option>
 <option value="1">Favorite</option></select></td></tr>
@@ -66,7 +70,11 @@
 <input type="submit" value="ADD RESTAURANT"/>
 </form>
 
+</div>
+<div class="col-sm-1"></div>
 
+</div><!-- END OF ROW -->
+</div><!-- END OF CONTAINER -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
