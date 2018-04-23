@@ -65,12 +65,12 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `restaurantpickerdb`;
-INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (1, 'Subway', 'Cheap', 'Fast Casual', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 0, 1);
-INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (2, 'Applebees', 'Average', 'American Casual', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 0, 1);
-INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (3, 'Osaka', 'Pricey', 'Asian', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 0, 1);
-INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (4, 'Sonic', 'Cheap', 'Fast Casual', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 0, 1);
-INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (5, 'Qdoba', 'Cheap', 'Fast Casual', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 0, 1);
-INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (6, 'Thai Pan', 'Cheap', 'Asian', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 0, 1);
+INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (1, 'Subway', 'Cheap', 'Fast Casual', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 1, 1);
+INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (2, 'Applebees', 'Average', 'American Casual', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 1, 1);
+INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (3, 'Osaka', 'Pricey', 'Asian', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 1, 1);
+INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (4, 'Sonic', 'Cheap', 'Fast Casual', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 1, 1);
+INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (5, 'Qdoba', 'Cheap', 'Fast Casual', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 1, 1);
+INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (6, 'Thai Pan', 'Cheap', 'Asian', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 1, 1);
 INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (7, 'El Taco Del Mexico', 'Cheap', 'Mexican', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 0, 1);
 INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (8, 'Taco Bell', 'Cheap', 'Fast Casual', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 0, 1);
 INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (9, 'Biker Jims', 'Cheap', 'Fast Casual', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 0, 1);
