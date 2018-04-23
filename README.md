@@ -4,7 +4,10 @@
 
 ## How To Run This Project
 
-This project is run from the web, or from a local server. The RestaurantPickerWebApp is the project from which the web app is run.
+This project is run from the web, or from a local server. The RestaurantPickerWebApp is the project from which the web app is run. On startup, the program will direct the user to the UserController getToLoginPage method, which will open up the login page. The user must log in to use the app - a new user account can be made, or the following combination can be used:
+
+UN: alexwagner
+PW: alexwagner
 
 ## Project Description
 
