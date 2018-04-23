@@ -35,6 +35,19 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 52
 DEFAULT CHARACTER SET = utf8;
 
+
+-- -----------------------------------------------------
+-- Table `user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user` ;
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(100) NOT NULL,
+  `password` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 GRANT USAGE ON *.* TO rest@localhost;
  DROP USER rest@localhost;
@@ -103,5 +116,16 @@ INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `addres
 INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (49, 'PeaksLounge', 'Cheap', 'American Casual', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 0, 0);
 INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (50, 'Cake', 'Cheap', 'American Casual', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 0, 0);
 INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (51, 'Bennihanna', 'Pricey', 'Asian', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 0, 0);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `restaurantpickerdb`;
+INSERT INTO `user` (`id`, `username`, `password`) VALUES (0, 'alexwagner', 'alexwagner');
+INSERT INTO `user` (`id`, `username`, `password`) VALUES (DEFAULT, 'test', 'tester');
 
 COMMIT;

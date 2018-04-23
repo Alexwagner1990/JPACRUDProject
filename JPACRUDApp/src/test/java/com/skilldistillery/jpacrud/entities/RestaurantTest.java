@@ -1,6 +1,8 @@
 package com.skilldistillery.jpacrud.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -49,10 +51,15 @@ class RestaurantTest {
 	@Test
 	@DisplayName("Restaurant Adding")
 	void testAdd() {
+		String query = "select r from Restaurant r";
 		em.getTransaction().begin();
+		List<Restaurant> count = em.createQuery(query, Restaurant.class).getResultList();
+		int size1 = count.size();
 		em.persist(restaurant);
 		em.flush();
-		assertEquals(Price.CHEAP, restaurant.getPrice());
+		count = em.createQuery(query, Restaurant.class).getResultList();
+		int size2 = count.size();
+		assertEquals(size1, (size2 - 1));
 		em.getTransaction().rollback();
 		
 	}
