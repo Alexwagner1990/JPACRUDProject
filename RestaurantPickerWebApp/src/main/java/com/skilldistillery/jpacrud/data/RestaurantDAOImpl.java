@@ -230,8 +230,9 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 		String query = "select r from Restaurant r where r.favorite=1";
 		Restaurant pick = null;
 		List<Restaurant> results = em.createQuery(query, Restaurant.class).getResultList();
+		System.out.println(results);
 		Collections.shuffle(results);
-		if(results != null) {
+		if(results.size() != 0) {
 		pick = results.get(0);
 		}
 		return pick;

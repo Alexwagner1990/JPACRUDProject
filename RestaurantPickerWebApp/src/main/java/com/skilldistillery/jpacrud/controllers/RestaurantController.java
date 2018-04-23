@@ -85,6 +85,9 @@ public class RestaurantController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("WEB-INF/views/pickrest.jsp");
 		Restaurant picked = dao.pickRandomFavoriteRestaurant();
+		if(picked == null) {
+			mv.setViewName("WEB-INF/views/nofavorite.jsp");
+		}
 		mv.addObject("restaurant", picked);
 		return mv;
 	}
