@@ -39,6 +39,11 @@
 		<input type="submit" value="Quick Add!">
 	</form>
 	</td>
+	<td>
+	<form action="loginPage.do" method="get" >
+		<input type="submit" value="Logout">
+	</form>
+	</td>
 	</tr>
 	</table>
 </div>
@@ -97,6 +102,10 @@
 </div>
 <div class="row">
 <div class="col-sm-12">
+<c:if test="${empty fullList }">
+<h3>You don't have any Restaurants! Add some Restaurants!</h3>
+</c:if>
+<c:if test="${not empty fullList }">
 <table class="table table-striped">
 <thead>
 <tr>
@@ -114,6 +123,7 @@
 </c:forEach>
 </tbody>
 </table>
+</c:if>
 </div>
 </div>
 

@@ -34,6 +34,11 @@
 		<input type="submit" value="Quick Add!">
 	</form>
 	</td>
+		<td>
+	<form action="loginPage.do" method="get" >
+		<input type="submit" value="Logout">
+	</form>
+	</td>
 	</tr>
 	</table>
 </div>

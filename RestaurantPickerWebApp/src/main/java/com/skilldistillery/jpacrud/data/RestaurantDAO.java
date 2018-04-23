@@ -25,4 +25,5 @@ public interface RestaurantDAO {
 	public Restaurant pickRandomRestaurantOfPrice(String price);
 	public Restaurant pickRandomRestaurantOfDistance(String distance);
 	public Restaurant pickRandomFavoriteRestaurant();
+
 }

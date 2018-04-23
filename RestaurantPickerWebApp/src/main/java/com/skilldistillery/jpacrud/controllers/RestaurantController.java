@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.jpacrud.data.RestaurantDAO;
-import com.skilldistillery.jpacrud.entities.Distance;
-import com.skilldistillery.jpacrud.entities.Price;
 import com.skilldistillery.jpacrud.entities.Restaurant;
+import com.skilldistillery.jpacrud.entities.User;
 
 @Controller
 public class RestaurantController {
@@ -21,6 +20,15 @@ public class RestaurantController {
 	@Autowired
 	private RestaurantDAO dao;
 
+	@RequestMapping(path = "index.do", method = RequestMethod.POST)
+	public ModelAndView indexP() {
+		ModelAndView mv = new ModelAndView();
+		List<Restaurant> fullList = dao.allRestaurants();
+		mv.setViewName("WEB-INF/views/index.jsp");
+		mv.addObject("fullList", fullList);
+		return mv;
+	}
+	
 	@RequestMapping(path = "index.do", method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView mv = new ModelAndView();
@@ -208,4 +216,14 @@ public class RestaurantController {
 		mv.addObject(picked);
 		return mv;
 	}
+	
+//	@RequestMapping(path="loginPage.do", method=RequestMethod.GET)
+//	public ModelAndView goToLoginPage(@RequestParam(name="test")String test) {
+//		ModelAndView mv = new ModelAndView();
+//		mv.setViewName("WEB-INF/views/login.jsp");
+//		mv.addObject("user", new User());
+//		return mv;
+//	}
+	
+	
 }

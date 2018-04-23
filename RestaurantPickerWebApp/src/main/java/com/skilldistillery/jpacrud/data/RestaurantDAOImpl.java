@@ -23,7 +23,6 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 
 	@Override
 	public List<Restaurant> allRestaurants() {
-		System.out.println("In method");
 		String query = "Select r from Restaurant r";
 		List<Restaurant> allRestaurants = em.createQuery(query, Restaurant.class).getResultList();
 		return allRestaurants;
