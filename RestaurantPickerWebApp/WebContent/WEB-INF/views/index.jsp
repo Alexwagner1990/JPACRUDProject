@@ -26,16 +26,19 @@
 	</td>
 	<td>
 	<form action="pickrandom.do" method="post">
+		<c:if test="${not empty user }"><input type="hidden" name="user" value="${user.id }"></c:if>
 		<input type="submit" value="Quick Pick!">
 	</form>
 	</td>
 	<td>
 	<form action="pickfavorite.do" method="post">
+		<c:if test="${not empty user }"><input type="hidden" name="user" value="${user.id }"></c:if>
 		<input type="submit" value="Pick a Favorite!"/>
 	</form>
 	</td>
 	<td>
 	<form action="quickadd.do" method="post" >
+		<c:if test="${not empty user }"><input type="hidden" name="user" value="${user.id }"></c:if>
 		<input type="submit" value="Quick Add!">
 	</form>
 	</td>
@@ -52,8 +55,9 @@
 </div> <!-- END OF NAVBAR CONTAINER -->
 <div class="jumbotron text-center">
   <h1>RESTAURANT PICKER</h1>      
-  <p>Want to go out to eat tonight, but not sure where to go? Let Restaurant Picker help!</p>
-  <p>Give us some restaurants to choose from, and we'll pick a restaurant for you!</p>
+  <p>User currently logged in: <c:if test="${not empty user }">${user.username }</c:if>
+  <c:if test="${empty user }">N/A - logout and log back in, apologies for inconvenience</c:if></p>
+  
 </div>
 <div class="container-fluid">
 <div class="row">
@@ -65,6 +69,7 @@
 <tr>
 	<td>
 	<form action="findrest.do" method="post">
+	<c:if test="${not empty user }"><input type="hidden" name="user" value="${user.id }"></c:if>
 		<input type="text" name="searchTerm" placeholder="Name of Restaurant">
 		<input type="submit" value="Find a Restaurant!">
 	</form>
@@ -81,6 +86,7 @@
 		<option value="distance">Distance</option>
 		<option value="price">Price</option>
 		</select>
+		<c:if test="${not empty user }"><input type="hidden" name="user" value="${user.id }"></c:if>
 		<input type="submit" value="List Restaurants">
 	</form>
 	</td>
@@ -93,6 +99,7 @@
 	<td>
 	<form action="addrestPage.do" method="post">
 		<input type="number" name="restNums" placeholder="# of Restaurants to Add" required>
+		<c:if test="${not empty user }"><input type="hidden" name="user" value="${user.id }"></c:if>
 		<input type="submit" value="Add Multiple">
 	</form>
 	</td>
@@ -117,8 +124,8 @@
 <tr>
 <td>${rest.name }</td>	<td>${rest.category }</td> <td><c:if test="${rest.favorite == 1 }"><img class="favorite" alt="Yes" src="images/checkmark.jpg"></c:if>
 <c:if test="${rest.favorite == 0 }"><img class="favorite" alt="No" src="images/xmark.jpg"></c:if></td> 
-<td><form action="updatePage.do" method="post"><input type="hidden" name="id" value="${rest.id}"/><input type="submit" value="UPDATE THIS RESTAURANT"/></form></td>
-<td><form action="delete.do" method="post"><input type="hidden" name="id" value="${rest.id}"/><input type="submit" value="DELETE THIS RESTAURANT"/></form></td>
+<td><form action="updatePage.do" method="post"><c:if test="${not empty user }"><input type="hidden" name="user" value="${user.id }"></c:if><input type="hidden" name="id" value="${rest.id}"/><input type="submit" value="UPDATE THIS RESTAURANT"/></form></td>
+<td><form action="delete.do" method="post"><c:if test="${not empty user }"><input type="hidden" name="user" value="${user.id }"></c:if><input type="hidden" name="id" value="${rest.id}"/><input type="submit" value="DELETE THIS RESTAURANT"/></form></td>
 </tr>
 </c:forEach>
 </tbody>

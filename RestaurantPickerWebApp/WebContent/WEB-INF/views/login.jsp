@@ -23,16 +23,17 @@
 <div class="col-sm-2 well"></div>
 <div class="col-sm-8 text-center">
 <form action="loginAsUser.do" method="post">
-<input type="text" name="login[]" placeholder="User Name"/>
-<input type="password" name="login[]" placeholder="Password"/>
+<input type="text" name="login[]" placeholder="User Name" required/>
+<input type="password" name="login[]" placeholder="Password" required/>
 <input type="submit" class="btn btn-primary btn-block" value="LOG IN"/>
 </form>
 <c:if test="${login == 1 }">
 <p>Login Unsuccessful, check credentials!</p>
 </c:if>
+<br>
 <form action="createAccount.do" method="post">
-<input type="text" name="create[]" placeholder="Choose a User Name"/>
-<input type="password" name="create[]" placeholder="Choose a Password"/>
+<input type="text" name="create[]" placeholder="Choose a User Name" required/>
+<input type="password" name="create[]" placeholder="Choose a Password" required/>
 <input type="submit" class="btn btn-primary btn-block" value="CREATE ACCOUNT"/>
 </form>
 <c:if test="${created == 0 }">
@@ -40,6 +41,31 @@
 </c:if>
 <c:if test="${created == 1}">
 <p>User successfully created!</p>
+</c:if>
+<br>
+<form action="changeAccount.do" method="post">
+<input type="text" name="change[]" placeholder="User Name" required/>
+<input type="password" name="change[]" placeholder="Old Password" required/>
+<input type="password" name="change[]" placeholder="New Password" required/>
+<input type="submit" class="btn btn-primary btn-block" value="CHANGE PASSWORD"/>
+</form>
+<c:if test="${change == 1 }">
+<p>Password Updated!</p>
+</c:if>
+<c:if test="${change == 2 }">
+<p>Incorrect Password, try again</p>
+</c:if>
+<br>
+<form action="deleteAccount.do" method="post">
+<input type="text" name="delete[]" placeholder="User Name" required/>
+<input type="password" name="delete[]" placeholder="Password" required/>
+<input type="submit" class="btn btn-primary btn-block" value="DELETE ACCOUNT"/>
+</form>
+<c:if test="${delete == 1 }">
+<p>Delete Successful!</p>
+</c:if>
+<c:if test="${delete == 2 }">
+<p>Delete Not Successful, check credentials and try again</p>
 </c:if>
 <div class="col-sm-2 well"></div>
 </div>

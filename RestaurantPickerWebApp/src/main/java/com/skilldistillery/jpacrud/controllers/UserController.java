@@ -22,6 +22,8 @@ public class UserController {
 		mv.setViewName("WEB-INF/views/login.jsp");
 		mv.addObject("created", new Integer(2));
 		mv.addObject("login", new Integer(0));
+		mv.addObject("change", new Integer(0));
+		mv.addObject("delete", new Integer(0));
 		return mv;
 	}
 	
@@ -54,6 +56,33 @@ public class UserController {
 		}
 		return mv;
 	}
-
+	
+	@RequestMapping(path="changeAccount.do", method=RequestMethod.POST)
+	public ModelAndView changePassword(@RequestParam(name="change[]")String[] change) {
+		ModelAndView mv = new ModelAndView();
+		Boolean checkSuccess = udao.changeUserPassword(change);
+		mv.setViewName("WEB-INF/views/login.jsp");
+		if(checkSuccess) {
+			mv.addObject("change", new Integer(1));
+		}
+		else {
+			mv.addObject("change", new Integer(2));
+		}
+		return mv;
+	}
+	
+	@RequestMapping(path="deleteAccount.do", method=RequestMethod.POST)
+	public ModelAndView deleteAccount(@RequestParam(name="delete[]")String[] delete) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("WEB-INF/views/login.jsp");
+		Boolean checkSuccess = udao.deleteUser(delete);
+		if(checkSuccess) {
+			mv.addObject("delete", new Integer(1));
+		}
+		else {
+			mv.addObject("delete", new Integer(2));
+		}
+		return mv;
+	}
 
 }

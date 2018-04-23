@@ -11,14 +11,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.jpacrud.data.RestaurantDAO;
+import com.skilldistillery.jpacrud.data.UserDAO;
+import com.skilldistillery.jpacrud.data.UserDAOImpl;
 import com.skilldistillery.jpacrud.entities.Restaurant;
-import com.skilldistillery.jpacrud.entities.User;
 
 @Controller
 public class RestaurantController {
 
 	@Autowired
 	private RestaurantDAO dao;
+	
+	private UserDAO udao = new UserDAOImpl();
 
 	@RequestMapping(path = "index.do", method = RequestMethod.POST)
 	public ModelAndView indexP() {

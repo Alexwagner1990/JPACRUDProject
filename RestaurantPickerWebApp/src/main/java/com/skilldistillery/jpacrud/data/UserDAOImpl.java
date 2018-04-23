@@ -55,4 +55,43 @@ public class UserDAOImpl implements UserDAO{
 		return null;
 	}
 
+	@Override
+	public User getUserById(int id) {
+		User user = em.find(User.class, id);
+		return user;
+	}
+
+	@Override
+	public Boolean changeUserPassword(String[] updateinfo) {
+		String query = "select u from User u";
+		List<User> userlist = em.createQuery(query, User.class).getResultList();
+		for (User user : userlist) {
+			if(updateinfo[0].equalsIgnoreCase(user.getUsername())) {
+				if(updateinfo[1].equals(user.getPassword())) {
+					user.setPassword(updateinfo[2]);
+//					em.persist(user);
+					em.flush();
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public Boolean deleteUser(String[] unpw) {
+		String query = "select u from User u";
+		List<User> userlist = em.createQuery(query, User.class).getResultList();
+		for (User user : userlist) {
+			if(unpw[0].equalsIgnoreCase(user.getUsername())) {
+				if(unpw[1].equals(user.getPassword())) {
+					em.remove(user);
+					em.flush();
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 }
