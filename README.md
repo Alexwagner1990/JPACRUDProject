@@ -9,19 +9,30 @@ This project is run from the web, or from a local server. The RestaurantPickerWe
 UN: alexwagner
 PW: alexwagner
 
-UPDATE 4/25: As of 9:20 AM user functionality appears to work as expected - now you will not see data unless you use the loggin creentials listed above.
+UPDATE 4/25: User functionality appears to work as expected - now you will not see data unless you use the login credentials listed above. Please see the commit on Sunday, April 22 to see the app as it was before the due date.
 
 ## NOTE ABOUT PROJECT
 
-This project requires a user name and a password to log in, but the functionality tying a user to a particular restaurant in the database is not yet implemented. For now, any valid login will take the user to a shared database of restaurants. I intended for each user to have a unique set of restaurants based on a restaurant's user_id, but I ran out of time - I will definitely implement it in the near future.
+~~This project requires a user name and a password to log in, but the functionality tying a user to a particular restaurant in the database is not yet implemented. For now, any valid login will take the user to a shared database of restaurants. I intended for each user to have a unique set of restaurants based on a restaurant's user_id, but I ran out of time - I will definitely implement it in the near future.~~
+
+UPDATE 4/25: User functionality appears to function as expected. Basic CRUD operations still worked before the 4/22 deadline (on both Users and Restaurants).
 
 I also realize the visual state of the project itself is a bit rough - I spent much more time implementing additional functionalities and I didn't spend much time utilizing Bootstrap to the fullest. I'll have to dive deeper into Bootstrap nuances to figure out what's going on with the odd formatting of some of the buttons/tables. That's also something I plan on improving in the future.
 
 ## Project Description
 
-My girlfriend likes to go out to eat, but she doesn't always know where to go, and she's not super confident that when I give a suggestion I'm telling her where I actually want to eat and not where I think she wants to eat. Three years ago, right around when we were just learning about arrays in this program, I decided to try and make a really simple app to offer a solution to this problem, just to get more comfortable with not only learning about Java technologies but using them as well. The app started off very simply - it basically was just a Math.random() with some restaurant names in an array, and it would randomly pick a name of a restaurant we liked to go out to eat. As I learned more and more, I returned to that app when I could and refactored it to include more technologies (changed the array to a List, had the program read restaurants form a file, etc.). This is something of a continuation of that evolution - I wanted to bring that simple little main method Java console app into the Web.
+My girlfriend likes to go out to eat, but she doesn't always know where to go, and she's not super confident that when I give a suggestion I'm telling her where I actually want to eat and not where I think she wants to eat. Right around when we were just learning about arrays in this program (feels like years ago), I decided to try and make a really simple app to offer a solution to this problem, just to get more comfortable with using the Java technologies I was learning about. The app started off very simply - it was basically just an array of restaurant names, and it would sysout a Math.random()'ed array index to pick a random restaurant. As I learned more and more, I returned to that app (when I could) and refactored it to include more technologies (changed the array to a List, had the program read restaurants from a file, etc.). This is something of a continuation of that evolution - I wanted to bring that simple little main method Java console app to the Web.
+
+To use this project the user must log in using a valid username/password combination. For some pre-populated data, use the following credentials:
+
+UN: alexwagner
+PW: alexwagner
+
+User passwords can also be updated and unwanted users can be deleted with no database issues. Once a valid user is created and used to log in, the app transitions to the restaurant picker portion of the app.  
 
 This project can pick a random restaurant from a database, and the program returns the restaurant and displays it on the page. The user can also enter the name of a restaurant to display that restaurant. From either of these pages, the user can update the restaurant or delete it. If the user chooses to update the restaurant, the user can enter in new values for several (although not all) of the fields for the restaurant, and the restaurant in the database will be updated successfully if provided with valid values. If the user chooses to delete the restaurant, the restaurant is removed from the database (or if the delete was unsuccessful, an error message displays). The user can also add restaurants to the database, and later find them with the search function or from being randomly selected.
+
+The restaurants that are available to a particular user are limited to restaurants that the user has actually added - restaurants added by user A are not visible to user B, and when a user picks a random restaurant (by any filter) the user is given back only a restaurant that corresponds to his or her unique user ID (which cannot be changed by the user and is assigned upon account creation).
 
 ## Lessons Learned
 
