@@ -9,6 +9,8 @@ This project is run from the web, or from a local server. The RestaurantPickerWe
 UN: alexwagner
 PW: alexwagner
 
+UPDATE 4/25: As of 9:20 AM user functionality appears to work as expected - now you will not see data unless you use the loggin creentials listed above.
+
 ## NOTE ABOUT PROJECT
 
 This project requires a user name and a password to log in, but the functionality tying a user to a particular restaurant in the database is not yet implemented. For now, any valid login will take the user to a shared database of restaurants. I intended for each user to have a unique set of restaurants based on a restaurant's user_id, but I ran out of time - I will definitely implement it in the near future.
