@@ -1,9 +1,14 @@
 package com.skilldistillery.jpacrud.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -13,6 +18,9 @@ public class User {
 	private int id;
 	private String username;
 	private String password;
+	
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+	private List<Restaurant> restaurants;
 	
 	public User() {
 		
@@ -43,6 +51,14 @@ public class User {
 		return id;
 	}
 
+	public List<Restaurant> getRestaurants() {
+		return restaurants;
+	}
+
+	public void setRestaurants(List<Restaurant> restaurants) {
+		this.restaurants = restaurants;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -68,6 +84,42 @@ public class User {
 		return true;
 	}
 	
+	public void addRestaurants(Restaurant restaurant) {
+		if(restaurants == null) {
+			restaurants = new ArrayList<>();
+		}
+		if(!restaurants.contains(restaurant)) {
+			restaurants.add(restaurant);
+			if(restaurant.getUser() != null) {
+				restaurant.getUser().getRestaurants().remove(restaurant);
+			}
+		}
+		restaurant.setUser(this);
+	}
+	
+	public void removeRestaurants(Restaurant restaurant) {
+		restaurant.setUser(null);
+		if(restaurants != null) {
+			restaurants.remove(restaurant);
+		}
+	}
+	
+//	public void addRestaurantToUser(Restaurant restaurant) {
+//		if(restaurants==null) {
+//			restaurants=new ArrayList<>();
+//		}
+//		if(!restaurants.contains(restaurant)) {
+//			restaurants.add(restaurant);
+//			if(restaurant.getUser() != null) {
+//				restaurant.getUser().removeRestaurantFromUser(restaurant);
+//			}
+//		}
+//		restaurant.setUser(this);
+//	}
+//	
+//	public void removeRestaurantFromUser(Restaurant restaurant) {
+//		
+//	}
 	
 	
 	

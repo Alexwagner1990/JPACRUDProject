@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Pick A Restaurant!</title>
+<title>Add A Restaurant!</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="css/MyCss.css">
 </head>
@@ -38,7 +38,7 @@
 	</form>
 	</td>
 		<td>
-	<form action="loginPage.do" method="get" >
+	<form action="logout.do" method="post" >
 		<input type="submit" value="Logout">
 	</form>
 	</td>
@@ -58,14 +58,14 @@
 <option value="CHEAP">Cheap</option>
 <option value="AVERAGE">Average</option>
 <option value="PRICEY">Pricey</option></select></td></tr>
-<tr><td>Category:</td><td><input type="text" name="category" value=" " placeholder="Category"></td></tr>
+<tr><td>Category:</td><td><input type="text" name="category" placeholder="Category"></td></tr>
 <tr><td>Distance:</td><td><select name="distance">
 <option value="NONE">N/A</option>
 <option value="CLOSE">Close</option>
 <option value="AVERAGE">Average</option>
 <option value="FAR">Far</option></select></td></tr>
-<tr><td>Address:</td><td><input type="text" name="address" value=" " placeholder="Address"></td></tr>
-<tr><td>Website:</td><td><input type="text" name="logo" value=" " placeholder="Address"></td></tr>
+<tr><td>Address:</td><td><input type="text" name="address" placeholder="Address"></td></tr>
+<tr><td>Website:</td><td><input type="text" name="logo" placeholder="Address"></td></tr>
 <tr><td>Favorite:</td><td><select name="favorite">
 <option value="0">Unfavorite</option>
 <option value="1">Favorite</option></select></td></tr>

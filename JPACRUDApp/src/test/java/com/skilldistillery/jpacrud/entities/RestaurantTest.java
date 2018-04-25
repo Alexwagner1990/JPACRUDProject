@@ -29,7 +29,7 @@ class RestaurantTest {
 		restaurant.setDistance(Distance.AVERAGE);
 		restaurant.setFavorite(0);
 		restaurant.setLogo("TEST");
-		restaurant.setUserId(0);
+//		restaurant.setUserId(0);
 		restaurant.setName("TEST");
 		restaurant.setPrice(Price.CHEAP);
 	}
@@ -82,6 +82,15 @@ class RestaurantTest {
 		em.getTransaction().begin();
 		em.remove(em.find(Restaurant.class, 1));
 		assertEquals(null, em.find(Restaurant.class, 1));
+		em.getTransaction().rollback();
+	}
+	
+	@Test
+	@DisplayName("Restaurant Mapping Relationship With User")
+	void testUserRelationship() {
+		em.getTransaction().begin();
+		assertEquals(51, em.find(Restaurant.class, 10).getUser().getRestaurants().size());
+		assertEquals("alexwagner", em.find(Restaurant.class, 10).getUser().getRestaurants().get(0).getUser().getUsername());
 		em.getTransaction().rollback();
 	}
 

@@ -81,5 +81,10 @@ class UserTest {
 		em.getTransaction().rollback();
 	}
 
-
+	@Test
+	@DisplayName("User Relationship with Restaurant")
+	void testRestaurantRelationship() {
+		em.getTransaction().begin();
+		assertEquals("alexwagner", em.find(Restaurant.class, 1).getUser().getUsername());
+	}
 }

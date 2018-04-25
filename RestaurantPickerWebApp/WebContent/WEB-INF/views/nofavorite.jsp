@@ -38,7 +38,7 @@
 	</form>
 	</td>
 		<td>
-	<form action="loginPage.do" method="get" >
+	<form action="logout.do" method="post" >
 		<input type="submit" value="Logout">
 	</form>
 	</td>

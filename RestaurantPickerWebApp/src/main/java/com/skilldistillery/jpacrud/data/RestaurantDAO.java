@@ -2,28 +2,25 @@ package com.skilldistillery.jpacrud.data;
 
 import java.util.List;
 
-import com.skilldistillery.jpacrud.entities.Category;
-import com.skilldistillery.jpacrud.entities.Distance;
-import com.skilldistillery.jpacrud.entities.Price;
 import com.skilldistillery.jpacrud.entities.Restaurant;
+import com.skilldistillery.jpacrud.entities.User;
 
 public interface RestaurantDAO {
 	
-	public List<Restaurant> allRestaurants();
-	public List<Restaurant> allRestaurantsOfType(Restaurant rest);
-	public boolean addManyRestaurants(String[] names);
-	public boolean addRestaurant(Restaurant restaurants);
-	public boolean deleteRestaurant(int id);
-	public Restaurant updateRestaurant(Restaurant restaurant, int id);
-	public Restaurant pickRandomRestaurant();
-	public List<Restaurant> viewRestaurantInformation(String restName);
-	public Restaurant findRestaurantById(int id);
-	public List<Restaurant> getRestaurantsOfCategory(String category);
-	public List<Restaurant> getRestaurantsOfPrice(String price);
-	public List<Restaurant> getRestaurantsOfDistance(String distance);
-	public Restaurant pickRandomRestaurantOfCategory(String category);
-	public Restaurant pickRandomRestaurantOfPrice(String price);
-	public Restaurant pickRandomRestaurantOfDistance(String distance);
-	public Restaurant pickRandomFavoriteRestaurant();
+	public List<Restaurant> allRestaurants(User user); 
+	public boolean addManyRestaurants(String[] names, User user); 
+	public boolean addRestaurant(Restaurant restaurants, User user); 
+	public boolean deleteRestaurant(int id); //DONE DON'T NEED USER FOR METHOD
+	public Restaurant updateRestaurant(Restaurant restaurant, int id, User user); 
+	public Restaurant pickRandomRestaurant(User user); 
+	public List<Restaurant> viewRestaurantInformation(String restName, User user); 
+	public Restaurant findRestaurantById(int id); // DONE THINK THIS IS HELP METHOD DON'T NEED USER
+	public List<Restaurant> getRestaurantsOfCategory(String category, User user); 
+	public List<Restaurant> getRestaurantsOfPrice(String price, User user); 
+	public List<Restaurant> getRestaurantsOfDistance(String distance, User user); 
+	public Restaurant pickRandomRestaurantOfCategory(String category, User user); 
+	public Restaurant pickRandomRestaurantOfPrice(String price, User user); 
+	public Restaurant pickRandomRestaurantOfDistance(String distance, User user); 
+	public Restaurant pickRandomFavoriteRestaurant(User user); 
 
 }

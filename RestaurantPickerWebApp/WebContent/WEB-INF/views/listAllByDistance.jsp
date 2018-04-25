@@ -40,7 +40,7 @@
 	</form>
 	</td>
 		<td>
-	<form action="loginPage.do" method="get" >
+	<form action="logout.do" method="post" >
 		<input type="submit" value="Logout">
 	</form>
 	</td>
@@ -51,15 +51,15 @@
 </div> <!-- END OF NAVBAR -->
 </div> <!-- END OF NAVBAR CONTAINER -->
 <div class="jumbotron text-center">
-  <h1>RESTAURANTS BY PRICE</h1>      
-  <p>List all Restaurants by a Price</p>
+  <h1>RESTAURANTS BY DISTANCE</h1>      
+  <p>List all Restaurants by a Distance</p>
 </div>
 <div class="container-fluid text-center">
 <div class="row">
 <div class="col-sm-4"></div>
 <div class="col-sm-4">
 <form action="findDistance.do" method="post">
-Enter a Price:<select name="distance">
+Enter a Distance:<select name="distance">
 <option value="NONE">N/A</option>
 <option value="CLOSE">Close</option>
 <option value="AVERAGE">Average</option>
@@ -81,13 +81,13 @@ Enter a Price:<select name="distance">
 <table class="table table-striped">
 <thead>
 <tr>
-<th>Name</th><th>Category</th><th>Price</th><th>Address</th><th>Favorite</th>
+<th>Name</th><th>Category</th><th>Price</th><th>Distance</th><th>Favorite</th>
 </tr>
 </thead>
 <tbody>
 <c:forEach var="rest" items="${restList}">
 <tr>
-<td>${rest.name }</td>	<td>${rest.category }</td> <td>${rest.price }</td> <td>${rest.address }</td> <td><c:if test="${rest.favorite == 1 }"><img class="favorite" alt="Yes" src="images/checkmark.jpg"></c:if>
+<td>${rest.name }</td>	<td>${rest.category }</td> <td>${rest.price }</td> <td>${rest.distance }</td> <td><c:if test="${rest.favorite == 1 }"><img class="favorite" alt="Yes" src="images/checkmark.jpg"></c:if>
 <c:if test="${rest.favorite == 0 }"><img class="favorite" alt="No" src="images/xmark.jpg"></c:if></td> 
 <td><form action="updatePage.do" method="post"><input type="hidden" name="id" value="${rest.id}"/><input type="submit" value="UPDATE THIS RESTAURANT"></form></td>
 <td><form action="delete.do" method="post"><input type="hidden" name="id" value="${rest.id}"/><input type="submit" value="DELETE THIS RESTAURANT"></form></td>

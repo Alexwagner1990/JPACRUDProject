@@ -16,6 +16,19 @@ CREATE SCHEMA IF NOT EXISTS `restaurantpickerdb` DEFAULT CHARACTER SET utf8 ;
 USE `restaurantpickerdb` ;
 
 -- -----------------------------------------------------
+-- Table `user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user` ;
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(100) NOT NULL,
+  `password` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `restaurant`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `restaurant` ;
@@ -30,23 +43,16 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
   `logo` VARCHAR(1000) NULL DEFAULT 'PLACEHOLDER',
   `favorite` TINYINT(4) NULL DEFAULT 0,
   `user_id` INT(11) NULL DEFAULT 0,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  INDEX `fk_user_id_id_idx` (`user_id` ASC),
+  CONSTRAINT `fk_user_id_id`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 52
 DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `user`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `user` ;
-
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(100) NOT NULL,
-  `password` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
 
 SET SQL_MODE = '';
 GRANT USAGE ON *.* TO rest@localhost;
@@ -59,6 +65,17 @@ GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE * TO 'rest'@'localhost';
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `user`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `restaurantpickerdb`;
+INSERT INTO `user` (`id`, `username`, `password`) VALUES (0, 'alexwagner', 'alexwagner');
+INSERT INTO `user` (`id`, `username`, `password`) VALUES (DEFAULT, 'test', 'tester');
+
+COMMIT;
+
 
 -- -----------------------------------------------------
 -- Data for table `restaurant`
@@ -116,16 +133,5 @@ INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `addres
 INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (49, 'PeaksLounge', 'Cheap', 'American Casual', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 0, 1);
 INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (50, 'Cake', 'Cheap', 'American Casual', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 0, 1);
 INSERT INTO `restaurant` (`id`, `name`, `price`, `category`, `distance`, `address`, `logo`, `favorite`, `user_id`) VALUES (51, 'Bennihanna', 'Pricey', 'Asian', 'NONE', 'PLACEHOLDER', 'PLACEHOLDER', 0, 1);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `user`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `restaurantpickerdb`;
-INSERT INTO `user` (`id`, `username`, `password`) VALUES (0, 'alexwagner', 'alexwagner');
-INSERT INTO `user` (`id`, `username`, `password`) VALUES (DEFAULT, 'test', 'tester');
 
 COMMIT;

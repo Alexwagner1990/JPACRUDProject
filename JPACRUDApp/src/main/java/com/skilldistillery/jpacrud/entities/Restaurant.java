@@ -7,6 +7,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Restaurant {
@@ -23,25 +25,26 @@ public class Restaurant {
 	private String address;
 	private String logo;
 	private Integer favorite;
-	@Column(name="user_id")
-	private Integer userId;
+//	@Column(name="user_id")
+//	private Integer userId;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	
 	public Restaurant() {
 		
 	}
 	
+	public Restaurant(String name, User user, Integer favorite) {
+		this.name = name;
+		this.user = user;
+		this.favorite = favorite;
+	}
+	
 	public Restaurant(String name) {
 		this.name=name;
 	}
-//	public Restaurant(int id, Price price, String category, Distance distance, String address, String logo) {
-//		super();
-//		this.id = id;
-//		this.price = price;
-//		this.category = category;
-//		this.distance = distance;
-//		this.address = address;
-//		this.logo = logo;
-//	}
 	
 	public int getId() {
 		return id;
@@ -88,11 +91,19 @@ public class Restaurant {
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}
-	public Integer getUserId() {
-		return userId;
+//	public Integer getUserId() {
+//		return userId;
+//	}
+//	public void setUserId(Integer userId) {
+//		this.userId = userId;
+//	}
+
+	public User getUser() {
+		return user;
 	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	

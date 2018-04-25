@@ -17,7 +17,7 @@
 	<table>
 	<tr>
 		<td>
-		<form action="index.do" method="get">
+		<form action="index.do" method="post">
 		<input type="submit" value="Home">
 		</form>
 	</td>
@@ -37,7 +37,7 @@
 	</form>
 	</td>
 		<td>
-	<form action="loginPage.do" method="get" >
+	<form action="logout.do" method="post" >
 		<input type="submit" value="Logout">
 	</form>
 	</td>

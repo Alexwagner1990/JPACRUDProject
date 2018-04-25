@@ -38,7 +38,7 @@
 	</form>
 	</td>
 		<td>
-	<form action="loginPage.do" method="get" >
+	<form action="logout.do" method="post" >
 		<input type="submit" value="Logout">
 	</form>
 	</td>
@@ -52,6 +52,7 @@
 <%-- <c:forEach var="r" items="searchTerm"> --%>
 <c:if test="${not empty searchTerm}">
 <table>
+<c:forEach var="searchTerm" items="${searchTerm }">
 <tr><td>Name:</td><td>${searchTerm.name }</td></tr>
 <tr><td>Price:</td><td>${searchTerm.price }</td></tr>
 <tr><td>Category:</td><td>${searchTerm.category }</td></tr>
@@ -69,6 +70,8 @@
 <input type="submit" value="DELETE THIS RESTAURANT"/>
 <input type="hidden" name="id" value="${searchTerm.id }"/>
 </form></td></tr>
+<tr><td></td></tr>
+</c:forEach>
 </table>
 </c:if>
 <c:if test="${empty searchTerm}">

@@ -20,20 +20,20 @@
 	<table>
 	<tr>
 	<td>
-		<form action="index.do" method="get">
+		<form action="index.do" method="post">
 		<input type="submit" value="Home">
 		</form>
 	</td>
 	<td>
 	<form action="pickrandom.do" method="post">
 		<c:if test="${not empty user }"><input type="hidden" name="user" value="${user.id }"></c:if>
-		<input type="submit" value="Quick Pick!">
+ 		<input type="submit" value="Quick Pick!">
 	</form>
 	</td>
 	<td>
 	<form action="pickfavorite.do" method="post">
 		<c:if test="${not empty user }"><input type="hidden" name="user" value="${user.id }"></c:if>
-		<input type="submit" value="Pick a Favorite!"/>
+ 		<input type="submit" value="Pick a Favorite!"/>
 	</form>
 	</td>
 	<td>
@@ -43,10 +43,15 @@
 	</form>
 	</td>
 	<td>
-	<form action="loginPage.do" method="get" >
+	<form action="logout.do" method="post" >
 		<input type="submit" value="Logout">
 	</form>
-	</td>
+<!-- 	</td>
+	<td>
+	<form action="refresh.do" method="post" >
+		<input type="submit" value="Refresh">
+	</form>
+	</td> -->
 	</tr>
 	</table>
 </div>
@@ -55,7 +60,7 @@
 </div> <!-- END OF NAVBAR CONTAINER -->
 <div class="jumbotron text-center">
   <h1>RESTAURANT PICKER</h1>      
-  <p>User currently logged in: <c:if test="${not empty user }">${user.username }</c:if>
+  <p>User currently logged in: <c:if test="${not empty user }">${sessionScope.user.username }</c:if>
   <c:if test="${empty user }">N/A - logout and log back in, apologies for inconvenience</c:if></p>
   
 </div>

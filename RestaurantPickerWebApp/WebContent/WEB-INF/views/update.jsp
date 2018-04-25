@@ -37,7 +37,7 @@
 	</form>
 	</td>
 		<td>
-	<form action="loginPage.do" method="get" >
+	<form action="logout.do" method="post" >
 		<input type="submit" value="Logout">
 	</form>
 	</td>
@@ -48,11 +48,11 @@
 <div class="col-sm-2"></div>
 <div class="col-sm-8 text-center">
 <h1>UPDATE RESTAURANT</h1>
+
 <form action="update.do" name="restaurant" method="post">
 <input type="hidden" name="id" value="${restaurant.id}">
-<input type="hidden" name="userId" value="${restaurant.userId}">
 <table>
-<tr><td>Name:</td><td>${restaurant.name }</td><td><input type="text" name="name" placeholder="New Name" required/></td></tr>
+<tr><td>Name:</td><td>${restaurant.name }</td><td><input type="text" name="name" value="${restaurant.name }" placeholder="New Name" required/></td></tr>
 <tr><td>Price:</td><td>${restaurant.price }</td>
 <td><select name="price">
 <option value="NONE">N/A</option>
@@ -60,19 +60,19 @@
 <option value="AVERAGE">Average</option>
 <option value="PRICEY">Pricey</option>
 </select></td></tr>
-<tr><td>Category:</td><td>${restaurant.category }</td><td><input type="text" name="category" placeholder="New Category"/></td></tr>
+<tr><td>Category:</td><td>${restaurant.category }</td><td><input type="text" value="${restaurant.category }" name="category" placeholder="New Category"/></td></tr>
 <tr><td>Distance:</td><td>${restaurant.distance }</td><td><select name="distance">
 <option value="NONE">N/A</option>
 <option value="CLOSE">Close</option>
 <option value="AVERAGE">Average</option>
 <option value="FAR">Far</option>
 </select></td></tr>
-<tr><td>Address:</td><td>${restaurant.address }</td><td><input type="text" name="address" placeholder="New Address"/></td></tr>
+<tr><td>Address:</td><td>${restaurant.address }</td><td><input type="text" name="address" value="${restaurant.address }" placeholder="New Address"/></td></tr>
 <tr><td>Favorite:</td><td><c:if test="${restaurant.favorite == 1 }"><img class="favorite" alt="Yes" src="images/checkmark.jpg"></c:if>
 <c:if test="${restaurant.favorite == 0 }"><img class="favorite" alt="No" src="images/xmark.jpg"></c:if></td><td><select name="favorite">
 <option value="0">Unfavorite</option>
 <option value="1">Favorite</option></select></td></tr>
-<tr><td>Website:</td><td>${restaurant.logo }</td><td><input type="text" name="logo" placeholder="Logo URL"/></td></tr>
+<tr><td>Website:</td><td>${restaurant.logo }</td><td><input type="text" name="logo" value="${restaurant.logo }" placeholder="Logo URL"/></td></tr>
 </table>
 <input type="submit" value="MAKE SELECTED CHANGES">
 </form>

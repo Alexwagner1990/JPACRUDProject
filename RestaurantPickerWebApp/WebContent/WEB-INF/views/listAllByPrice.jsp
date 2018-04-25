@@ -29,13 +29,19 @@
 		<input type="submit" value="Quick Pick!">
 	</form>
 	</td>
+		<td>
+	<form action="pickfavorite.do" method="post">
+		<c:if test="${not empty user }"><input type="hidden" name="user" value="${user.id }"></c:if>
+		<input type="submit" value="Pick a Favorite!"/>
+	</form>
+	</td>
 	<td>
 	<form action="quickadd.do" method="post" >
 		<input type="submit" value="Quick Add!">
 	</form>
 	</td>
 		<td>
-	<form action="loginPage.do" method="get" >
+	<form action="logout.do" method="post" >
 		<input type="submit" value="Logout">
 	</form>
 	</td>

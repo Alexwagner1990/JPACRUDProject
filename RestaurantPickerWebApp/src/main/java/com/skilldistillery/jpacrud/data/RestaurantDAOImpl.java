@@ -13,6 +13,7 @@ import com.skilldistillery.jpacrud.entities.Category;
 import com.skilldistillery.jpacrud.entities.Distance;
 import com.skilldistillery.jpacrud.entities.Price;
 import com.skilldistillery.jpacrud.entities.Restaurant;
+import com.skilldistillery.jpacrud.entities.User;
 
 @Transactional
 @Component
@@ -22,28 +23,20 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 	private EntityManager em;
 
 	@Override
-	public List<Restaurant> allRestaurants() {
-		String query = "Select r from Restaurant r";
-		List<Restaurant> allRestaurants = em.createQuery(query, Restaurant.class).getResultList();
-		return allRestaurants;
-	}
-
-	
-	//NOT YET COMPLETED
-	@Override
-	public List<Restaurant> allRestaurantsOfType(Restaurant rest) {
-		String query = "select r from Restaurant r where price = ?, category = ?, distance = ?, favorite = ?";
-		List<Restaurant> allRest = allRestaurants();
-		// em.createStoredProcedureQuery(query);
-		return allRest;
+	public List<Restaurant> allRestaurants(User user) {
+		String query = "select r from Restaurant r join fetch r.user where r.user=:user";
+		List<Restaurant> restaurantList = em.createQuery(query, Restaurant.class).setParameter("user", user).getResultList();
+		return restaurantList;
 	}
 
 	@Override
-	public boolean addManyRestaurants(String[] names) {
+	public boolean addManyRestaurants(String[] names, User user) {
 		try {
 			Restaurant add = null;
-			for (String name : names){
+			for (String name : names) {
 				add = new Restaurant(name);
+				add.setUser(user);
+				add.setFavorite(0);
 				em.persist(add);
 				em.flush();
 			}
@@ -55,8 +48,9 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 	}
 
 	@Override
-	public boolean addRestaurant(Restaurant restaurant) {
+	public boolean addRestaurant(Restaurant restaurant, User user) {
 		try {
+			restaurant.setUser(user);
 			em.persist(restaurant);
 			em.flush();
 			return true;
@@ -79,34 +73,37 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 	}
 
 	@Override
-	public Restaurant updateRestaurant(Restaurant restaurant, int id) {
+	public Restaurant updateRestaurant(Restaurant restaurant, int id, User user) {
 		Restaurant db = em.find(Restaurant.class, id);
-		System.out.println(db);
+		db.setName(restaurant.getName());
 		db.setAddress(restaurant.getAddress());
 		db.setCategory(restaurant.getCategory());
 		db.setDistance(restaurant.getDistance());
 		db.setPrice(restaurant.getPrice());
 		db.setLogo(restaurant.getLogo());
 		db.setFavorite(restaurant.getFavorite());
-		db.setUserId(restaurant.getUserId());
+		db.setUser(user);
 		em.persist(db);
 		em.flush();
-		System.out.println(db);
 		return db;
 	}
 
 	@Override
-	public Restaurant pickRandomRestaurant() {
-		List<Restaurant> allRest = allRestaurants();
+	public Restaurant pickRandomRestaurant(User user) {
+		List<Restaurant> allRest = allRestaurants(user);
 		Collections.shuffle(allRest);
-		Restaurant picked = allRest.get(0);
+		Restaurant picked = null;
+		if (allRest.size() > 0) {
+			picked = allRest.get(0);
+		}
 		return picked;
 	}
 
 	@Override
-	public List<Restaurant> viewRestaurantInformation(String restName) {
-		String queryString = "SELECT r FROM Restaurant r where r.name = :name";
-		List<Restaurant> search = em.createQuery(queryString, Restaurant.class).setParameter("name", restName).getResultList();
+	public List<Restaurant> viewRestaurantInformation(String restName, User user) {
+		String queryString = "SELECT r FROM Restaurant r join fetch r.user where r.name like :name and r.user = :user";
+		List<Restaurant> search = em.createQuery(queryString, Restaurant.class)
+				.setParameter("name", "%" + restName + "%").setParameter("user", user).getResultList();
 		return search;
 	}
 
@@ -116,83 +113,92 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 		return restaurant;
 	}
 
-
 	@Override
-	public List<Restaurant> getRestaurantsOfCategory(String category) {
-		String query = "Select r from Restaurant r where r.category = :category";
-		List<Restaurant> results = em.createQuery(query, Restaurant.class).setParameter("category", category).getResultList();
+	public List<Restaurant> getRestaurantsOfCategory(String category, User user) {
+		String query = "Select r from Restaurant r join fetch r.user where r.category = :category and r.user= :user";
+		List<Restaurant> results = em.createQuery(query, Restaurant.class).setParameter("category", category)
+				.setParameter("user", user).getResultList();
 		return results;
 	}
 
-
 	@Override
-	public List<Restaurant> getRestaurantsOfPrice(String price) {
-		String query = "Select r from Restaurant r where r.price = :price";
+	public List<Restaurant> getRestaurantsOfPrice(String price, User user) {
+		String query = "Select r from Restaurant r join fetch r.user where r.price = :price and r.user=:user";
 		List<Restaurant> results = null;
-		if(price.equals("CHEAP")) {
-			results = em.createQuery(query, Restaurant.class).setParameter("price", Price.CHEAP).getResultList();	
+		if (price.equals("CHEAP")) {
+			results = em.createQuery(query, Restaurant.class).setParameter("price", Price.CHEAP)
+					.setParameter("user", user).getResultList();
 		}
-		if(price.equals("AVERAGE")) {
-			results = em.createQuery(query, Restaurant.class).setParameter("price", Price.AVERAGE).getResultList();	
+		if (price.equals("AVERAGE")) {
+			results = em.createQuery(query, Restaurant.class).setParameter("price", Price.AVERAGE)
+					.setParameter("user", user).getResultList();
 		}
-		if(price.equals("PRICEY")) {
-			results = em.createQuery(query, Restaurant.class).setParameter("price", Price.PRICEY).getResultList();	
+		if (price.equals("PRICEY")) {
+			results = em.createQuery(query, Restaurant.class).setParameter("price", Price.PRICEY)
+					.setParameter("user", user).getResultList();
 		}
-		if(price.equals("NONE")) {
-			results = em.createQuery(query, Restaurant.class).setParameter("price", Price.NONE).getResultList();	
+		if (price.equals("NONE")) {
+			results = em.createQuery(query, Restaurant.class).setParameter("price", Price.NONE)
+					.setParameter("user", user).getResultList();
 		}
 		return results;
 	}
 
-
 	@Override
-	public List<Restaurant> getRestaurantsOfDistance(String distance) {
-		String query = "Select r from Restaurant r where r.distance = :distance";
+	public List<Restaurant> getRestaurantsOfDistance(String distance, User user) {
+		String query = "Select r from Restaurant r join fetch r.user where r.distance = :distance and r.user = :user";
 		List<Restaurant> results = null;
-		if(distance.equals("CLOSE")) {
-			results = em.createQuery(query, Restaurant.class).setParameter("distance", Distance.CLOSE).getResultList();	
+		if (distance.equals("CLOSE")) {
+			results = em.createQuery(query, Restaurant.class).setParameter("distance", Distance.CLOSE)
+					.setParameter("user", user).getResultList();
 		}
-		if(distance.equals("AVERAGE")) {
-			results = em.createQuery(query, Restaurant.class).setParameter("distance", Distance.AVERAGE).getResultList();	
+		if (distance.equals("AVERAGE")) {
+			results = em.createQuery(query, Restaurant.class).setParameter("distance", Distance.AVERAGE)
+					.setParameter("user", user).getResultList();
 		}
-		if(distance.equals("FAR")) {
-			results = em.createQuery(query, Restaurant.class).setParameter("distance", Distance.FAR).getResultList();	
+		if (distance.equals("FAR")) {
+			results = em.createQuery(query, Restaurant.class).setParameter("distance", Distance.FAR)
+					.setParameter("user", user).getResultList();
 		}
-		if(distance.equals("NONE")) {
-			results = em.createQuery(query, Restaurant.class).setParameter("distance", Distance.NONE).getResultList();	
+		if (distance.equals("NONE")) {
+			results = em.createQuery(query, Restaurant.class).setParameter("distance", Distance.NONE)
+					.setParameter("user", user).getResultList();
 		}
 		return results;
 	}
 
-
 	@Override
-	public Restaurant pickRandomRestaurantOfCategory(String category) {
-		String query = "Select r from Restaurant r where r.category = :category";
-		List<Restaurant> list = em.createQuery(query, Restaurant.class).setParameter("category", category).getResultList();
+	public Restaurant pickRandomRestaurantOfCategory(String category, User user) {
+		String query = "Select r from Restaurant r join fetch r.user where r.category = :category and r.user = :user";
+		List<Restaurant> list = em.createQuery(query, Restaurant.class).setParameter("category", category)
+				.setParameter("user", user).getResultList();
 		Collections.shuffle(list);
 		Collections.shuffle(list);
 		Restaurant chosen = list.get(0);
 		return chosen;
 	}
 
-
 	@Override
-	public Restaurant pickRandomRestaurantOfPrice(String price) {
-		
-		String query = "Select r from Restaurant r where r.price = :price";
+	public Restaurant pickRandomRestaurantOfPrice(String price, User user) {
+
+		String query = "Select r from Restaurant r join fetch r.user where r.price = :price and r.user = :user";
 		System.out.println("IN DAO");
 		List<Restaurant> list = null;
-		if(price.equals("NONE")) {
-			list = em.createQuery(query, Restaurant.class).setParameter("price", Price.NONE).getResultList();	
+		if (price.equals("NONE")) {
+			list = em.createQuery(query, Restaurant.class).setParameter("price", Price.NONE).setParameter("user", user)
+					.getResultList();
 		}
-		if(price.equals("CHEAP")) {
-			list = em.createQuery(query, Restaurant.class).setParameter("price", Price.CHEAP).getResultList();	
+		if (price.equals("CHEAP")) {
+			list = em.createQuery(query, Restaurant.class).setParameter("price", Price.CHEAP).setParameter("user", user)
+					.getResultList();
 		}
-		if(price.equals("AVERAGE")) {
-			list = em.createQuery(query, Restaurant.class).setParameter("price", Price.AVERAGE).getResultList();	
+		if (price.equals("AVERAGE")) {
+			list = em.createQuery(query, Restaurant.class).setParameter("price", Price.AVERAGE)
+					.setParameter("user", user).getResultList();
 		}
-		if(price.equals("PRICEY")) {
-			list = em.createQuery(query, Restaurant.class).setParameter("price", Price.PRICEY).getResultList();	
+		if (price.equals("PRICEY")) {
+			list = em.createQuery(query, Restaurant.class).setParameter("price", Price.PRICEY)
+					.setParameter("user", user).getResultList();
 		}
 		Collections.shuffle(list);
 		Collections.shuffle(list);
@@ -200,22 +206,25 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 		return chosen;
 	}
 
-
 	@Override
-	public Restaurant pickRandomRestaurantOfDistance(String distance) {
-		String query = "Select r from Restaurant r where r.distance = :distance";
+	public Restaurant pickRandomRestaurantOfDistance(String distance, User user) {
+		String query = "Select r from Restaurant r join fetch r.user where r.distance = :distance and r.user = :user";
 		List<Restaurant> list = null;
-		if(distance.equals("NONE")) {
-			list = em.createQuery(query, Restaurant.class).setParameter("distance", Distance.NONE).getResultList();
+		if (distance.equals("NONE")) {
+			list = em.createQuery(query, Restaurant.class).setParameter("distance", Distance.NONE)
+					.setParameter("user", user).getResultList();
 		}
-		if(distance.equals("CLOSE")) {
-			list = em.createQuery(query, Restaurant.class).setParameter("distance", Distance.CLOSE).getResultList();
+		if (distance.equals("CLOSE")) {
+			list = em.createQuery(query, Restaurant.class).setParameter("distance", Distance.CLOSE)
+					.setParameter("user", user).getResultList();
 		}
-		if(distance.equals("AVERAGE")) {
-			list = em.createQuery(query, Restaurant.class).setParameter("distance", Distance.AVERAGE).getResultList();
+		if (distance.equals("AVERAGE")) {
+			list = em.createQuery(query, Restaurant.class).setParameter("distance", Distance.AVERAGE)
+					.setParameter("user", user).getResultList();
 		}
-		if(distance.equals("FAR")) {
-			list = em.createQuery(query, Restaurant.class).setParameter("distance", Distance.FAR).getResultList();
+		if (distance.equals("FAR")) {
+			list = em.createQuery(query, Restaurant.class).setParameter("distance", Distance.FAR)
+					.setParameter("user", user).getResultList();
 		}
 		Collections.shuffle(list);
 		Collections.shuffle(list);
@@ -223,20 +232,16 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 		return chosen;
 	}
 
-
 	@Override
-	public Restaurant pickRandomFavoriteRestaurant() {
-		String query = "select r from Restaurant r where r.favorite=1";
+	public Restaurant pickRandomFavoriteRestaurant(User user) {
+		String query = "select r from Restaurant r join fetch r.user where r.favorite=1 and r.user = :user";
 		Restaurant pick = null;
-		List<Restaurant> results = em.createQuery(query, Restaurant.class).getResultList();
-		System.out.println(results);
+		List<Restaurant> results = em.createQuery(query, Restaurant.class).setParameter("user", user).getResultList();
 		Collections.shuffle(results);
-		if(results.size() != 0) {
-		pick = results.get(0);
+		if (results.size() != 0) {
+			pick = results.get(0);
 		}
 		return pick;
 	}
-	
-	
 
 }

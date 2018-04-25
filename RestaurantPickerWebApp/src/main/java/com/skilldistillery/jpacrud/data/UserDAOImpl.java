@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.skilldistillery.jpacrud.entities.Restaurant;
 import com.skilldistillery.jpacrud.entities.User;
 
 @Transactional
@@ -16,6 +17,7 @@ public class UserDAOImpl implements UserDAO{
 
 	@PersistenceContext
 	private EntityManager em;
+	
 	
 	@Override
 	public Boolean checkIfUsernameIsUnique(String username) {
@@ -85,6 +87,11 @@ public class UserDAOImpl implements UserDAO{
 		for (User user : userlist) {
 			if(unpw[0].equalsIgnoreCase(user.getUsername())) {
 				if(unpw[1].equals(user.getPassword())) {
+					List<Restaurant>userRestaurants = user.getRestaurants();
+					while (userRestaurants.size() > 0) {
+						user.removeRestaurants(user.getRestaurants().get(0));
+					}
+
 					em.remove(user);
 					em.flush();
 					return true;
